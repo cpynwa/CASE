@@ -1,0 +1,13 @@
+*.pyc
+*~
+__pycache__
+*venv
+db.sqlite3
+/static
+.DS_Store
+my_settings.py
+**/*.log
+**/*.gz
+**/migrations/
+logs
+manage.py

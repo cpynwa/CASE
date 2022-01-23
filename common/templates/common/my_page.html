@@ -20,11 +20,11 @@
             {% for data in jitem %}
             <tr>
                 <td>{{ data.manager }}</td>
-                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
                 <td>{{ data.site }}</td>
                 <td>{{ data.part }}</td>
                 <td>{{ data.os_ver }}</td>
-                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
+                <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.title }}</a></td>
                 <td>{{ data.progress }}</td>
             </tr>
             {% endfor %}
@@ -150,12 +150,12 @@
             {% for data in jitem %}
             <tr>
                 <td>{{ data.manager }}</td>
-                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
                 <td>{{ data.site }}</td>
                 <td>{{ data.part }}</td>
                 <td>{{ data.serial }}</td>
                 <td>{{ data.os_ver }}</td>
-                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
+                <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.title }}</a></td>
                 <td>{{ data.progress }}</td>
             </tr>
             {% endfor %}

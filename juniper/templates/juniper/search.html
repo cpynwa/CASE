@@ -15,24 +15,24 @@
             <col width="*">
             <col width="150px">
         </colgroup>
-        <tbody>
+        <thead class="thead-dark">
             <tr>
                 <th>작성자</th>
                 <th>case번호</th>
                 <th>사이트</th>
                 <th>모델</th>
-                <th>시리얼</th>
                 <th>os버전</th>
                 <th>제목</th>
                 <th>진행상태</th>
             </tr>
+        </thead>
+        <tbody>
             {% for data in item %}
             <tr>
                 <td>{{ data.manager }}</td>
                 <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
                 <td>{{ data.site }}</td>
                 <td>{{ data.part }}</td>
-                <td>{{ data.serial }}</td>
                 <td>{{ data.os_ver }}</td>
                 <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.title }}</a></td>
                 <td>{{ data.progress }}</td>

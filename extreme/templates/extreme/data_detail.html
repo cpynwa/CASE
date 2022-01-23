@@ -50,10 +50,10 @@
     </table>
     {% if request.user == item.manager %}
         <button type="button" onclick="location.href='{% url 'extreme_edit' pk=item.pk %}'"
-                class="btn btn-outline-success my-2 my-sm-0">수정</button>
+                class="btn btn-outline-secondary my-2 my-sm-0">수정</button>
         <button type="button" onclick="location.href='{% url 'extreme_delete' pk=item.pk %}'"
-                class="btn btn-outline-success my-2 my-sm-0">삭제</button>
+                class="btn btn-outline-secondary my-2 my-sm-0">삭제</button>
     {% endif %}
     <button type="button" onclick="location.href='{% url 'extreme_list' %}'"
-                    class="btn btn-outline-success my-2 my-sm-0">돌아가기</button>
+                    class="btn btn-outline-secondary my-2 my-sm-0">돌아가기</button>
 {% endblock %}

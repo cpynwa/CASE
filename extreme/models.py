@@ -6,8 +6,8 @@ from django.utils import timezone
 case_id = timezone.now().strftime('%Y-%m%d-%H%M%S') # 2022-01-11-043020
 # Create your models here.
 
-class JuniperCase(models.Model):
-    manager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='juniper_case')
+class ExtremeCase(models.Model):
+    manager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='extreme_case')
     created_date = models.DateTimeField(default=timezone.now)
     case_num = models.CharField(unique=True, max_length=19, default=case_id)
     site = models.CharField(max_length=20)

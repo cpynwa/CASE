@@ -1,0 +1,59 @@
+{% extends 'common/base.html' %}
+{% block content %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>작성일</th>
+                <td>{{ item.created_date|date:'Y-m-d H:i:s' }}</td>
+            </tr>
+            <tr>
+                <th>작성자</th>
+                <td>{{ item.manager }}</td>
+            </tr>
+            <tr>
+                <th>케이스번호</th>
+                <td>{{ item.case_num }}</td>
+            </tr>
+            <tr>
+                <th>사이트</th>
+                <td>{{ item.site }}</td>
+            </tr>
+            <tr>
+                <th>장비명</th>
+                <td>{{ item.part }}</td>
+            </tr>
+            <tr>
+                <th>serial</th>
+                <td>{{ item.serial }}</td>
+            </tr>
+            <tr>
+                <th>OS버전</th>
+                <td>{{ item.os_ver }}</td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td>{{ item.title }}</td>
+            </tr>
+            <tr>
+                <th>증상</th>
+                <td>{{ item.symptom }}</td>
+            </tr>
+            <tr>
+                <th>결과</th>
+                <td>{{ item.conclusion }}</td>
+            </tr>
+            <tr>
+                <th>진행사항</th>
+                <td>{{ item.progress }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% if request.user == item.manager %}
+        <button type="button" onclick="location.href='{% url 'extreme_edit' pk=item.pk %}'"
+                class="btn btn-outline-success my-2 my-sm-0">수정</button>
+        <button type="button" onclick="location.href='{% url 'extreme_delete' pk=item.pk %}'"
+                class="btn btn-outline-success my-2 my-sm-0">삭제</button>
+    {% endif %}
+    <button type="button" onclick="location.href='{% url 'extreme_list' %}'"
+                    class="btn btn-outline-success my-2 my-sm-0">돌아가기</button>
+{% endblock %}

@@ -1,0 +1,268 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container themed-container">
+    {% if perms.juniper.view_junipercase and perms.extreme.view_extremecase %}
+    <h4>Juniper Case</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>작성자</th>
+                <th>case번호</th>
+                <th>사이트</th>
+                <th>모델</th>
+                <th>os버전</th>
+                <th>제목</th>
+                <th>진행상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in jitem %}
+            <tr>
+                <td>{{ data.manager }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td>{{ data.site }}</td>
+                <td>{{ data.part }}</td>
+                <td>{{ data.os_ver }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
+                <td>{{ data.progress }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if item.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ jitem.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in jitem.paginator.page_range %}
+            {% if page_number == question_list.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if jitem.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ jitem.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    <h4>Extreme Case</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>작성자</th>
+                <th>case번호</th>
+                <th>사이트</th>
+                <th>모델</th>
+                <th>시리얼</th>
+                <th>os버전</th>
+                <th>제목</th>
+                <th>진행상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in eitem %}
+            <tr>
+                <td>{{ data.manager }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td>{{ data.site }}</td>
+                <td>{{ data.part }}</td>
+                <td>{{ data.serial }}</td>
+                <td>{{ data.os_ver }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
+                <td>{{ data.progress }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if item.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ eitem.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in eitem.paginator.page_range %}
+            {% if page_number == question_list.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if eitem.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ eitem.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    {% elif perms.juniper.view_junipercase %}
+    <h4>Juniper Case</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>작성자</th>
+                <th>case번호</th>
+                <th>사이트</th>
+                <th>모델</th>
+                <th>시리얼</th>
+                <th>os버전</th>
+                <th>제목</th>
+                <th>진행상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in jitem %}
+            <tr>
+                <td>{{ data.manager }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td>{{ data.site }}</td>
+                <td>{{ data.part }}</td>
+                <td>{{ data.serial }}</td>
+                <td>{{ data.os_ver }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
+                <td>{{ data.progress }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if item.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ jitem.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in jitem.paginator.page_range %}
+            {% if page_number == question_list.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if jitem.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ jitem.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    {% elif perms.extreme.view_extremecase %}
+    <h4>Extreme Case</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>작성자</th>
+                <th>case번호</th>
+                <th>사이트</th>
+                <th>모델</th>
+                <th>시리얼</th>
+                <th>os버전</th>
+                <th>제목</th>
+                <th>진행상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in eitem %}
+            <tr>
+                <td>{{ data.manager }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td>{{ data.site }}</td>
+                <td>{{ data.part }}</td>
+                <td>{{ data.serial }}</td>
+                <td>{{ data.os_ver }}</td>
+                <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
+                <td>{{ data.progress }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if item.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ eitem.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in eitem.paginator.page_range %}
+            {% if page_number == question_list.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if eitem.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ eitem.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    {% endif %}
+</div>
+{% endblock %}

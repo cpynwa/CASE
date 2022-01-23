@@ -1,0 +1,12 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<div class="form-group">
+    <form method="POST" class="data-form">
+        {% csrf_token %}
+        <p class="created_date">작성시간: {{ data.created_date|date:'Y-m-d H:i:s' }}</p>
+        <p class="creator">작성자: {{ request.user.username }}</p>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-secondary my-2 my-sm-0" name="vendor" value="extreme">Save</button>
+    </form>
+</div>
+{% endblock %}

@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'import_export',
     'django_extensions',
+    'account',
+    'common',
     'juniper',
+    'extreme',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,63 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#기본로그인 URL
+LOGIN_URL = "/login"
+
+# 세션 설정
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+
+# 세션 타임아웃 / (초 * 분 * 시간)
+SESSION_EXPIRE_SECONDS =  60 * 60 * 1
+
+# 파일 import / export 기능 추가
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+# 로깅 설정
+LOG_FILE = os.path.join(os.path.dirname(__file__), '..', 'myLog.log')
+LOGGING = {
+  'version': 1,
+  'disable_existing_loggers': False,
+  'formatters': {
+    'verbose': {
+      'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+      'datefmt' : "%d/%b/%Y %H:%M:%S"
+    },
+    'simple': {
+    'format': '%(levelname)s %(message)s'
+    },
+  },
+  'handlers': {
+    'file': {
+    'level': 'DEBUG',
+    'class': 'logging.handlers.RotatingFileHandler',
+    'filename': LOG_FILE,
+    'formatter': 'verbose',
+    'maxBytes':1024*1024*10,
+    'backupCount':5,
+  },
+  },
+  'loggers': {
+    'django': {
+      'handlers':['file'],
+      'propagate': True,
+      'level':'INFO',
+    },
+    'django.request': {
+      'handlers':['file'],
+      'propagate': False,
+      'level':'INFO',
+    },
+    'IMS': {
+      'handlers': ['file'],
+      'level': 'DEBUG',
+    },
+    'account': {
+      'handlers': ['file'],
+      'level': 'DEBUG',
+
+    },
+  }
+}

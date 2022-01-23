@@ -1,12 +1,15 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from .models import JuniperCase
+from .models import ExtremeCase
 
-class JuniperCaseForm(forms.ModelForm):
+class ExtremeCaseForm(forms.ModelForm):
 
     class Meta:
-        model = JuniperCase
+        model = ExtremeCase
         fields = ["title", "symptom", "conclusion", "site", "os_ver", "serial", "part", "progress"]
+        labels = {
+            'install_date': _('설치일'),
+        }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'symptom': forms.Textarea(attrs={'class': 'form-control'}),

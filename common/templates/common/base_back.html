@@ -1,0 +1,32 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <title>Juniper Case Management System</title>
+        <!-- Bootstrap CSS -->
+    </head>
+    <body>
+        <div class="page-header">
+            <a href="{% url 'my_page' %}"><img src="{% static 'image/logo.png' %}" alt=""></a>
+            <div>
+                {% if user.is_authenticated %}
+                    <p class="username">안녕하세요! {{ user }}님</p>
+                    <a href="{% url 'logout' %}" class="logout">로그아웃</a>
+                    <a href="{% url 'change_password' %}" class="change_password">패스워드변경</a>
+                    <br>
+                    <a href="{% url 'my_page' %}" class="my_page">마이페이지</a>
+                    {% if perms.juniper.view_junipercase and perms.extreme.view_extremecase %}
+                        <a href="{% url 'juniper_list' %}" class="juniper_list">주니퍼 케이스 리스트</a>
+                        <a href="{% url 'extreme_list' %}" class="extreme_list">익스트림 케이스 리스트</a>
+                    {% elif perms.juniper.view_junipercase %}
+                        <a href="{% url 'juniper_list' %}" class="juniper_list">주니퍼 케이스 리스트</a>
+                    {% elif perms.extreme.view_extremecase %}
+                        <a href="{% url 'extreme_list' %}" class="extreme_list">익스트림 케이스 리스트</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

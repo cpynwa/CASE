@@ -5,17 +5,18 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from tablib import Dataset
-from .models import JuniperCase
-from .form import JuniperCaseForm
-from .resources import JuniperCaseResource
+from .models import ExtremeCase
+from .form import ExtremeCaseForm
+from .resources import ExtremeCaseResource
 
 
-
+# Create your views here.
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def data_list(request):
+    print(request.META)
     # db 조회 생성 날짜 순으로 전체 조회
-    item = JuniperCase.objects.order_by('-created_date')
+    item = ExtremeCase.objects.order_by('-created_date')
 
     # url의 query string에서 'page'에 해당하는 값을 가져옵니다. 단, page값이 존재하지 않을 경우 1로 셋팅합니다.
     page = request.GET.get('page', '1')
@@ -23,14 +24,14 @@ def data_list(request):
     # 페이징처리
     paginator = Paginator(item, 20) # 페이지당 20개씩 보여주기
     page_obj = paginator.get_page(page)
-    return render(request, 'juniper/data_list.html', {'item': page_obj})
+    return render(request, 'extreme/data_list.html', {'item': page_obj})
 
 
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def data_new(request):
     case_id = timezone.now().strftime('%Y-%m%d-%H%M%S') # 2022-0111-043020
-    form = JuniperCaseForm(request.POST)
+    form = ExtremeCaseForm(request.POST)
     nowdate = timezone.now()
     if request.method == "POST":
         if form.is_valid():
@@ -39,50 +40,50 @@ def data_new(request):
             data.created_date = timezone.now()
             data.case_num = case_id
             data.save()
-            return redirect('juniper_detail', pk=data.pk)
+            return redirect('extreme_detail', pk=data.pk)
     else:
-        form = JuniperCaseForm()
-        return render(request, 'juniper/data_edit.html', {'form': form, 'nowdate': nowdate})
+        form = ExtremeCaseForm()
+        return render(request, 'extreme/data_edit.html', {'form': form, 'nowdate': nowdate})
 
 
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def data_detail(request, pk):
-    item = get_object_or_404(JuniperCase, pk=pk)
-    return render(request, 'juniper/data_detail.html', {'item': item})
+    item = get_object_or_404(ExtremeCase, pk=pk)
+    return render(request, 'extreme/data_detail.html', {'item': item})
 
 
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def data_edit(request, pk):
-    item = get_object_or_404(JuniperCase, pk=pk)
+    item = get_object_or_404(ExtremeCase, pk=pk)
     if request.method == "POST":
-        form = JuniperCaseForm(request.POST, instance=item)
+        form = ExtremeCaseForm(request.POST, instance=item)
         if form.is_valid():
             data = form.save(commit=False)
             data.manager = request.user
             data.save()
-            return redirect('juniper_detail', pk=data.pk)
+            return redirect('extreme_detail', pk=data.pk)
     else:
-        form = JuniperCaseForm(instance=item)
-    return render(request, 'juniper/data_edit.html', {'form': form})
+        form = ExtremeCaseForm(instance=item)
+    return render(request, 'extreme/data_edit.html', {'form': form})
 
 
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def data_delete(request, pk):
-    item = JuniperCase.objects.get(pk=pk)
+    item = ExtremeCase.objects.get(pk=pk)
     if request.user == item.manager:
         item.delete()
-        return redirect('juniper_list')
+        return redirect('extreme_list')
     else:
-        return redirect('juniper_detail', pk=item.pk)
+        return redirect('extreme_detail', pk=item.pk)
 
 
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def search(request):
-    item = JuniperCase.objects.all().order_by('-id')
+    item = ExtremeCase.objects.all().order_by('-id')
     q = request.POST.get('q', "")
     if q:
         item = item.filter(
@@ -97,15 +98,15 @@ def search(request):
             Q(conclusion__icontains=q) |
             Q(progress__icontains=q)
         )
-        return render(request, 'juniper/search.html', {'item': item, 'q': q})
+        return render(request, 'extreme/search.html', {'item': item, 'q': q})
     else:
-        return render(request, 'juniper/search.html')
+        return render(request, 'extreme/search.html')
 
 
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def data_export(request):
-    person_resource = JuniperCaseResource()
+    person_resource = ExtremeCaseResource()
     dataset = person_resource.export()
     response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="{}_data.xls"'.format(timezone.now())
@@ -113,14 +114,14 @@ def data_export(request):
 
 
 @login_required
-@permission_required('juniper.view_junipercase', raise_exception=True)
+@permission_required('extreme.view_extremecase', raise_exception=True)
 def data_import(request):
     if request.method == 'POST':
-        person_resource = JuniperCaseResource()
+        person_resource = ExtremeCaseResource()
         dataset = Dataset()
         new_persons = request.FILES['myfile']
         imported_data = dataset.load(new_persons.read())
         result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
         if not result.has_errors():
             person_resource.import_data(dataset, dry_run=False)  # Actually import now
-    return render(request, 'juniper/data_list.html')
+    return render(request, 'extreme/data_list.html')

@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = my_settings.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['10.1.112.50', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['211.45.116.50', '10.1.112.50', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -41,10 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'import_export',
     'django_extensions',
+    'axes',
     'account',
     'common',
     'juniper',
     'extreme',
+]
+
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'conf.urls'
@@ -119,7 +129,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -135,6 +145,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #기본로그인 URL
 LOGIN_URL = "/login"
+
+#로그인 횟수 제한
+AXES_FAILURE_LIMIT = 5
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
 
 # 세션 설정
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

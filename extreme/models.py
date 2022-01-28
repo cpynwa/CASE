@@ -10,6 +10,7 @@ class ExtremeCase(models.Model):
     manager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='extreme_case')
     created_date = models.DateTimeField(default=timezone.now)
     case_num = models.CharField(unique=True, max_length=19, default=case_id)
+    vendor_case_num = models.CharField(unique=True, null=True, blank=True, max_length=20)
     site = models.CharField(max_length=20)
     part = models.CharField(max_length=50)
     serial = models.CharField(max_length=25, null=True, blank=True)

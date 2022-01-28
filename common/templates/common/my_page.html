@@ -11,6 +11,7 @@
                 <th>case번호</th>
                 <th>vendor case번호</th>
                 <th>사이트</th>
+                <th>장비명</th>
                 <th>시리얼</th>
                 <th>제목</th>
                 <th>진행상태</th>
@@ -19,7 +20,7 @@
         <tbody>
             {% for data in jitem %}
             <tr>
-                <td>{{ data.manager }}</td>
+                <td>{{ data.manager.get_full_name }}</td>
                 <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
                 <td>{{ data.vendor_case_num }}</td>
                 <td>{{ data.site }}</td>
@@ -73,10 +74,10 @@
             <tr>
                 <th>작성자</th>
                 <th>case번호</th>
+                <th>vendor case번호</th>
                 <th>사이트</th>
-                <th>모델</th>
+                <th>장비명</th>
                 <th>시리얼</th>
-                <th>os버전</th>
                 <th>제목</th>
                 <th>진행상태</th>
             </tr>
@@ -84,12 +85,12 @@
         <tbody>
             {% for data in eitem %}
             <tr>
-                <td>{{ data.manager }}</td>
+                <td>{{ data.manager.get_full_name }}</td>
                 <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td>{{ data.vendor_case_num }}</td>
                 <td>{{ data.site }}</td>
                 <td>{{ data.part }}</td>
                 <td>{{ data.serial }}</td>
-                <td>{{ data.os_ver }}</td>
                 <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
                 <td>{{ data.progress }}</td>
             </tr>
@@ -139,10 +140,10 @@
             <tr>
                 <th>작성자</th>
                 <th>case번호</th>
+                <th>vendor case번호</th>
                 <th>사이트</th>
-                <th>모델</th>
+                <th>장비명</th>
                 <th>시리얼</th>
-                <th>os버전</th>
                 <th>제목</th>
                 <th>진행상태</th>
             </tr>
@@ -150,12 +151,12 @@
         <tbody>
             {% for data in jitem %}
             <tr>
-                <td>{{ data.manager }}</td>
+                <td>{{ data.manager.get_full_name }}</td>
                 <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td>{{ data.vendor_case_num }}</td>
                 <td>{{ data.site }}</td>
                 <td>{{ data.part }}</td>
                 <td>{{ data.serial }}</td>
-                <td>{{ data.os_ver }}</td>
                 <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.title }}</a></td>
                 <td>{{ data.progress }}</td>
             </tr>
@@ -205,10 +206,10 @@
             <tr>
                 <th>작성자</th>
                 <th>case번호</th>
+                <th>vendor case번호</th>
                 <th>사이트</th>
-                <th>모델</th>
+                <th>장비명</th>
                 <th>시리얼</th>
-                <th>os버전</th>
                 <th>제목</th>
                 <th>진행상태</th>
             </tr>
@@ -216,12 +217,12 @@
         <tbody>
             {% for data in eitem %}
             <tr>
-                <td>{{ data.manager }}</td>
+                <td>{{ data.manager.get_full_name }}</td>
                 <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
+                <td>{{ data.vendor_case_num }}</td>
                 <td>{{ data.site }}</td>
                 <td>{{ data.part }}</td>
                 <td>{{ data.serial }}</td>
-                <td>{{ data.os_ver }}</td>
                 <td><a href="{% url 'extreme_detail' pk=data.pk %}">{{ data.title }}</a></td>
                 <td>{{ data.progress }}</td>
             </tr>

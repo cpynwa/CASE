@@ -49,7 +49,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="#">안녕하세요! {{ user }}님</a>
+          <a class="nav-link" href="#">안녕하세요! {{ user.get_full_name }}님</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'change_password' %}">패스워드변경</a>
@@ -69,13 +69,13 @@
 <div class="nav-scroller bg-body shadow-sm">
   <nav class="nav nav-underline" aria-label="Secondary navigation">
     {% if perms.juniper.view_junipercase and perms.extreme.view_extremecase %}
-    <a class="nav-link" href="{% url 'juniper_list' %}">주니퍼 케이스</a>
-    <a class="nav-link" href="{% url 'extreme_list' %}">익스트림 케이스</a>
-	{% elif perms.juniper.view_junipercase %}
-    <a class="nav-link" href="{% url 'juniper_list' %}">주니퍼 케이스</a>
-	{% elif perms.extreme.view_extremecase %}
-    <a class="nav-link" href="{% url 'extreme_list' %}">익스트림 케이스</a>
-	{% endif %}
+      <a class="nav-link" href="{% url 'juniper_list' %}">주니퍼 케이스</a>
+      <a class="nav-link" href="{% url 'extreme_list' %}">익스트림 케이스</a>
+	  {% elif perms.juniper.view_junipercase %}
+      <a class="nav-link" href="{% url 'juniper_list' %}">주니퍼 케이스</a>
+	  {% elif perms.extreme.view_extremecase %}
+      <a class="nav-link" href="{% url 'extreme_list' %}">익스트림 케이스</a>
+  	{% endif %}
   </nav>
 </div>
 

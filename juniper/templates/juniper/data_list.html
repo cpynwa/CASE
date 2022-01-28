@@ -8,6 +8,7 @@
                 <th>case번호</th>
                 <th>vendor case번호</th>
                 <th>사이트</th>
+                <th>장비명</th>
                 <th>시리얼</th>
                 <th>제목</th>
                 <th>진행상태</th>
@@ -16,7 +17,7 @@
         <tbody>
             {% for data in item %}
             <tr>
-                <td>{{ data.manager }}</td>
+                <td>{{ data.manager.get_full_name }}</td>
                 <td><a href="{% url 'juniper_detail' pk=data.pk %}">{{ data.case_num }}</a></td>
                 <td>{{ data.vendor_case_num }}</td>
                 <td>{{ data.site }}</td>

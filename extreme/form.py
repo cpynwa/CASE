@@ -6,7 +6,7 @@ class ExtremeCaseForm(forms.ModelForm):
 
     class Meta:
         model = ExtremeCase
-        fields = ["title", "symptom", "conclusion", "site", "os_ver", "serial", "part", "progress"]
+        fields = ["title", "symptom", "conclusion", "site", "vendor_case_num", "os_ver", "serial", "part", "progress"]
         labels = {
             'install_date': _('설치일'),
         }
@@ -15,6 +15,7 @@ class ExtremeCaseForm(forms.ModelForm):
             'symptom': forms.Textarea(attrs={'class': 'form-control'}),
             'conclusion': forms.Textarea(attrs={'class': 'form-control'}),
             'site': forms.TextInput(attrs={'class': 'form-control'}),
+            'vendor_case_num': forms.TextInput(attrs={'class': 'form-control'}),
             'os_ver': forms.TextInput(attrs={'class': 'form-control'}),
             'serial': forms.TextInput(attrs={'class': 'form-control'}),
             'part': forms.TextInput(attrs={'class': 'form-control'}),

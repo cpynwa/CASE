@@ -8,11 +8,15 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>{{ item.manager }}</td>
+                <td>{{ item.manager.get_full_name }}</td>
             </tr>
             <tr>
                 <th>케이스번호</th>
                 <td>{{ item.case_num }}</td>
+            </tr>
+            <tr>
+                <th>벤더케이스번호</th>
+                <td>{{ item.vendor_case_num }}</td>
             </tr>
             <tr>
                 <th>사이트</th>

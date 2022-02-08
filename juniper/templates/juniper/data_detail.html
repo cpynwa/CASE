@@ -35,16 +35,20 @@
                 <td>{{ item.os_ver }}</td>
             </tr>
             <tr>
+                <th>호스트네임</th>
+                <td>{{ item.hostname }}</td>
+            </tr>
+            <tr>
                 <th>제목</th>
                 <td>{{ item.title }}</td>
             </tr>
             <tr>
                 <th>증상</th>
-                <td>{{ item.symptom }}</td>
+                <td>{{ item.symptom|linebreaks }}</td>
             </tr>
             <tr>
                 <th>결과</th>
-                <td>{{ item.conclusion }}</td>
+                <td>{{ item.conclusion|linebreaks }}</td>
             </tr>
             <tr>
                 <th>진행사항</th>

@@ -6,7 +6,7 @@ class JuniperCaseForm(forms.ModelForm):
 
     class Meta:
         model = JuniperCase
-        fields = ["title", "symptom", "conclusion", "site", "vendor_case_num", "os_ver", "serial", "part", "progress"]
+        fields = ["title", "symptom", "conclusion", "site", "vendor_case_num", "os_ver", "serial", "part", "hostname", "progress"]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'symptom': forms.Textarea(attrs={'class': 'form-control'}),
@@ -16,5 +16,6 @@ class JuniperCaseForm(forms.ModelForm):
             'os_ver': forms.TextInput(attrs={'class': 'form-control'}),
             'serial': forms.TextInput(attrs={'class': 'form-control'}),
             'part': forms.TextInput(attrs={'class': 'form-control'}),
+            'hostname': forms.TextInput(attrs={'class': 'form-control'}),
             'progress': forms.Select(attrs={'class': 'form-control'}),
         }

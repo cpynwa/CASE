@@ -11,8 +11,8 @@ from juniper.models import JuniperCase
 @login_required
 def my_page(request):
     current_user = request.user.id
-    jitem = JuniperCase.objects.filter(manager=current_user)
-    eitem = ExtremeCase.objects.filter(manager=current_user)
+    jitem = JuniperCase.objects.filter(manager=current_user).order_by('-created_date')
+    eitem = ExtremeCase.objects.filter(manager=current_user).order_by('-created_date')
 
     # url의 query string에서 'page'에 해당하는 값을 가져옵니다. 단, page값이 존재하지 않을 경우 1로 셋팅합니다.
     page = request.GET.get('page', '1')
